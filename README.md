@@ -5,7 +5,7 @@ Aquest projecte s’ha realitzat dins el mòdul *Projecte Intermodular*.
 
 ## Demostració
 
-🌐 https://pau-guerrero.github.io/web-corporativa/
+🌐 https://pau-guerrero.github.io/web-corporativa2/
 
 ## Tecnologies Utilitzades
 
