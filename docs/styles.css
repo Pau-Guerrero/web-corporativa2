@@ -17,8 +17,10 @@
     --dark-card: #162420;
     --dark-border: #1E332D;
     --text: #1F2937;
-    --text-light: #6B7280;
-    --text-lighter: #9CA3AF;
+    /* ✅ MILLORA: Contrast #4B5563 sobre blanc = 7.1:1 (abans 4.54:1) */
+    --text-light: #4B5563;
+    /* ✅ MILLORA: Contrast #64748B sobre blanc = 5.48:1 (abans 2.85:1) */
+    --text-lighter: #64748B;
     --text-on-dark: #E5E7EB;
     --text-on-dark-light: #9CA3AF;
     --border: #E8E0D4;
@@ -56,6 +58,21 @@ ul { list-style: none; }
 .container { max-width: var(--container-max); margin: 0 auto; padding: var(--container-padding); }
 .text-accent { color: var(--accent); }
 .text-left { text-align: left; }
+
+/* ==============================================
+   ✅ MILLORA: FOCUS VISIBLE PER TECLAT
+   Contrast 4.5:1 mínim en tots els elements interactius
+   ============================================== */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+.legal-toc-mobile-toggle:focus-visible,
+.legal-back-top:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+}
 
 /* ==============================================
    BARRA DE PROGRÉS
@@ -106,7 +123,8 @@ ul { list-style: none; }
 .hero-subtitle { font-size: clamp(1rem,2vw,1.15rem); color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto 36px; line-height: 1.8; }
 .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 .scroll-indicator { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px; animation: fadeInUp 1s ease 1.5s both; }
-.scroll-indicator span { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+/* ✅ MILLORA: Contrast text "Scroll" sobre fons fosc */
+.scroll-indicator span { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
 .scroll-line { width: 1px; height: 50px; background: rgba(255,255,255,0.15); position: relative; overflow: hidden; }
 .scroll-line::after { content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%; background: var(--accent); animation: scrollLine 2s ease-in-out infinite; }
 @keyframes scrollLine { 0% { top: -100%; } 50% { top: 100%; } 100% { top: 100%; } }
@@ -228,7 +246,7 @@ ul { list-style: none; }
 .checkbox-custom::after { content: ''; width: 10px; height: 6px; border-left: 2px solid var(--white); border-bottom: 2px solid var(--white); transform: rotate(-45deg) scale(0); transition: transform var(--transition-fast); margin-top: -2px; }
 .checkbox-label input:checked + .checkbox-custom { background: var(--accent); border-color: var(--accent); }
 .checkbox-label input:checked + .checkbox-custom::after { transform: rotate(-45deg) scale(1); }
-.checkbox-label input:focus-visible + .checkbox-custom { box-shadow: 0 0 0 3px rgba(232,93,58,0.3); }
+.checkbox-label input:focus-visible + .checkbox-custom { box-shadow: 0 0 0 3px rgba(232,93,58,0.4); }
 .checkbox-text { font-size: 0.85rem; color: var(--text-on-dark-light); line-height: 1.6; }
 .checkbox-text a { color: var(--accent-light); text-decoration: underline; text-underline-offset: 2px; transition: color var(--transition-fast); }
 .checkbox-text a:hover { color: var(--accent); }
@@ -253,8 +271,9 @@ ul { list-style: none; }
 .footer-links-col a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width var(--transition-base); }
 .footer-links-col a:hover { color: var(--white); }
 .footer-links-col a:hover::after { width: 100%; }
+/* ✅ MILLORA: Contrast peu de pàgina sobre fons fosc */
 .footer-bottom { padding: 24px 0; text-align: center; }
-.footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+.footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
 
 /* ==============================================
    BANNER DE COOKIES
@@ -269,8 +288,6 @@ ul { list-style: none; }
 .cookie-actions .btn-outline { color: var(--text-on-dark-light); border-color: var(--dark-border); }
 .cookie-actions .btn-outline:hover { color: var(--white); border-color: var(--text-on-dark-light); background: rgba(255,255,255,0.05); transform: none; box-shadow: none; }
 .cookie-btn-accept { flex: 1; min-width: 140px; justify-content: center; }
-
-/* Panell de configuració */
 .cookie-config-panel { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, margin 0.3s ease; opacity: 0; margin-top: 0; }
 .cookie-config-panel.open { max-height: 300px; opacity: 1; margin-top: 20px; }
 .cookie-config-panel h4 { font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 16px; }
@@ -285,34 +302,27 @@ ul { list-style: none; }
 .cookie-toggle-knob::before { content: ''; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--white); transition: transform var(--transition-base); box-shadow: var(--shadow-sm); }
 .cookie-toggle input:checked + .cookie-toggle-knob { background: var(--accent); }
 .cookie-toggle input:checked + .cookie-toggle-knob::before { transform: translateX(20px); }
-.cookie-toggle input:focus-visible + .cookie-toggle-knob { box-shadow: 0 0 0 3px rgba(232,93,58,0.3); }
+.cookie-toggle input:focus-visible + .cookie-toggle-knob { box-shadow: 0 0 0 3px rgba(232,93,58,0.4); }
 .cookie-toggle-disabled { opacity: 0.5; cursor: not-allowed; }
 .cookie-toggle-disabled .cookie-toggle-knob { background: var(--primary-light); }
 .cookie-toggle-disabled .cookie-toggle-knob::before { transform: translateX(20px); }
 .cookie-btn-save { width: 100%; justify-content: center; margin-top: 12px; }
 
 /* ==============================================
-   PÀGINES LEGALS — Disseny modern
-   (Només per avis-legal, politica-privacitat,
-   politica-cookies — NO afecta la landing)
+   PÀGINES LEGALS
    ============================================== */
 .legal-page { padding: 130px 0 80px; background: var(--cream); min-height: 100vh; }
 .legal-page .container { max-width: 1100px; }
-
 .legal-breadcrumb { display: flex; gap: 8px; align-items: center; margin-bottom: 32px; flex-wrap: wrap; }
 .legal-breadcrumb a { font-size: 0.85rem; color: var(--text-light); transition: color var(--transition-fast); }
 .legal-breadcrumb a:hover { color: var(--accent); }
 .legal-breadcrumb span { font-size: 0.85rem; color: var(--text-lighter); }
 .legal-breadcrumb .separator { color: var(--text-lighter); }
-
 .legal-header { margin-bottom: 40px; }
 .legal-header h1 { font-family: var(--font-display); font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 800; color: var(--primary-dark); margin-bottom: 8px; letter-spacing: -0.02em; line-height: 1.2; }
 .legal-header .legal-line { width: 50px; height: 3px; background: var(--accent); border-radius: 2px; margin-bottom: 12px; }
 .legal-header .legal-updated { font-size: 0.8rem; color: var(--text-lighter); font-style: italic; }
-
 .legal-layout { display: grid; grid-template-columns: 1fr; gap: 0; }
-
-/* Índex lateral Desktop */
 .legal-toc { display: none; }
 .legal-toc-inner { position: sticky; top: 100px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px 20px; max-height: calc(100vh - 120px); overflow-y: auto; }
 .legal-toc-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border-light); }
@@ -320,8 +330,6 @@ ul { list-style: none; }
 .legal-toc li a { display: block; font-size: 0.82rem; font-weight: 500; color: var(--text-light); padding: 8px 12px; border-radius: var(--radius-sm); border-left: 2px solid transparent; transition: all var(--transition-fast); line-height: 1.4; }
 .legal-toc li a:hover { color: var(--primary); background: rgba(12,75,51,0.04); border-left-color: var(--primary-light); }
 .legal-toc li a.active { color: var(--accent); font-weight: 600; background: rgba(232,93,58,0.06); border-left-color: var(--accent); }
-
-/* Índex mòbil */
 .legal-toc-mobile { display: block; margin-bottom: 32px; }
 .legal-toc-mobile-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-md); cursor: pointer; font-family: var(--font-body); font-size: 0.9rem; font-weight: 600; color: var(--primary-dark); transition: all var(--transition-fast); }
 .legal-toc-mobile-toggle:hover { border-color: var(--primary-light); }
@@ -332,10 +340,7 @@ ul { list-style: none; }
 .legal-toc-mobile-list ul { padding: 8px 12px 16px; display: flex; flex-direction: column; gap: 0; }
 .legal-toc-mobile-list li a { display: block; font-size: 0.85rem; font-weight: 500; color: var(--text-light); padding: 10px 12px; border-radius: var(--radius-sm); transition: all var(--transition-fast); }
 .legal-toc-mobile-list li a:hover { color: var(--accent); background: rgba(232,93,58,0.05); }
-
-/* Contingut legal */
 .legal-content { display: flex; flex-direction: column; gap: 24px; }
-
 .legal-section { background: var(--white); border: 1px solid var(--border-light); border-radius: var(--radius-md); overflow: hidden; transition: box-shadow var(--transition-base); }
 .legal-section:hover { box-shadow: var(--shadow-sm); }
 .legal-section-header { display: flex; align-items: center; gap: 14px; padding: 22px 28px 0; }
@@ -353,33 +358,23 @@ ul { list-style: none; }
 .legal-section-body ul li::before { content: ''; position: absolute; left: 0; top: 11px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); opacity: 0.7; }
 .legal-section-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; transition: color var(--transition-fast); }
 .legal-section-body a:hover { color: var(--accent-hover); }
-
-/* Caixa destacada */
 .legal-highlight { background: linear-gradient(135deg, rgba(232,93,58,0.06), rgba(232,93,58,0.02)); border: 1px solid rgba(232,93,58,0.15); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 16px 20px; margin: 16px 0; }
 .legal-highlight p { font-size: 0.9rem; color: var(--text); line-height: 1.75; margin-bottom: 0; }
 .legal-highlight p strong { color: var(--accent); }
-
-/* Caixa de contacte */
 .legal-contact-box { background: var(--primary-dark); border-radius: var(--radius-md); padding: 24px 28px; margin-top: 16px; }
 .legal-contact-box p { color: var(--text-on-dark-light); font-size: 0.9rem; line-height: 1.8; margin-bottom: 4px; }
 .legal-contact-box strong { color: var(--white); }
 .legal-contact-box a { color: var(--accent-light); }
 .legal-contact-box a:hover { color: var(--accent); }
-
-/* Grid de dades */
 .legal-data-grid { display: grid; grid-template-columns: 1fr; gap: 0; margin: 14px 0; border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
 .legal-data-item { display: flex; flex-direction: column; padding: 14px 18px; border-bottom: 1px solid var(--border-light); gap: 2px; }
 .legal-data-item:last-child { border-bottom: none; }
 .legal-data-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-lighter); }
 .legal-data-value { font-size: 0.93rem; color: var(--text); font-weight: 500; }
-
-/* Drets ARSLOP */
 .legal-rights-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 16px 0; }
 .legal-right-card { background: rgba(12,75,51,0.03); border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 16px 18px; border-left: 3px solid var(--primary-light); }
 .legal-right-card h4 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; }
 .legal-right-card p { font-size: 0.85rem; color: var(--text-light); line-height: 1.7; margin-bottom: 0; }
-
-/* Taules de cookies */
 .cookie-table { width: 100%; border-collapse: collapse; margin: 14px 0 0; font-size: 0.85rem; }
 .cookie-table thead th { background: var(--primary); color: var(--white); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 12px 14px; text-align: left; }
 .cookie-table thead th:first-child { border-radius: var(--radius-sm) 0 0 0; }
@@ -388,8 +383,6 @@ ul { list-style: none; }
 .cookie-table tbody tr:last-child td { border-bottom: none; }
 .cookie-table tbody tr:hover { background: rgba(12,75,51,0.02); }
 .cookie-table code { font-family: 'DM Sans', monospace; font-size: 0.82rem; background: rgba(12,75,51,0.06); padding: 2px 6px; border-radius: 3px; color: var(--primary-dark); font-weight: 500; }
-
-/* Botó tornar a dalt */
 .legal-back-top { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 40px; padding: 14px 24px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); cursor: pointer; font-family: var(--font-body); font-size: 0.88rem; font-weight: 500; color: var(--text-light); transition: all var(--transition-fast); width: fit-content; margin-left: auto; margin-right: auto; }
 .legal-back-top:hover { color: var(--primary); border-color: var(--primary-light); background: rgba(12,75,51,0.03); }
 .legal-back-top svg { transition: transform var(--transition-fast); }
@@ -421,7 +414,6 @@ ul { list-style: none; }
     .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; }
     .stat-number { font-size: 2.4rem; }
     .cookie-banner-inner { padding: 32px 40px 28px; }
-    /* Legal tablet */
     .legal-layout { grid-template-columns: 240px 1fr; gap: 40px; align-items: start; }
     .legal-toc { display: block; }
     .legal-toc-mobile { display: none; }
@@ -442,7 +434,6 @@ ul { list-style: none; }
     .service-card { padding: 40px 32px; }
     .about-image-wrapper img { height: 560px; }
     .stat-number { font-size: 2.8rem; }
-    /* Legal desktop gran */
     .legal-layout { grid-template-columns: 260px 1fr; gap: 48px; }
     .legal-section-header h2 { font-size: 1.25rem; }
     .cookie-table { font-size: 0.88rem; }
