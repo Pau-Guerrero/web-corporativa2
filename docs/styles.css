@@ -479,3 +479,11 @@ textarea:focus-visible,
     .cookie-banner { transition: none; }
     .cookie-config-panel { transition: none; }
 }
+
+/* ✅ FIX: Evitar parpelleig FOUT (Flash of Unstyled Text)
+   mentre el CSS es carrega asíncronament */
+body {
+    opacity: 0;
+    animation: cssLoad 0.01ms 0.01ms forwards;
+}
+@keyframes cssLoad { to { opacity: 1; } }

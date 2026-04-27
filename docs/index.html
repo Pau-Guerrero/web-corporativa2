@@ -5,10 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FoodLogics — Tecnologia Alimentària</title>
     <meta name="description" content="FoodLogics: transformem la indústria alimentària amb tecnologia avançada, logística intel·ligent i anàlisi de dades.">
+
+    <!-- ✅ FIX: Preconnect a fonts abans que el navegador les demani -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+
+    <!-- ✅ FIX: CSS asíncron — no bloqueja el renderitzat inicial -->
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+
+    <!-- ✅ FIX: Precarregar les fonts woff2 per evitar la cadena de dependències -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/playfairdisplay/v37/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgEM86xQ.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/dmsans/v15/rP2Yp2ywxg099Z4fMimS-6cySjCQ.woff2" as="font" type="font/woff2" crossorigin>
 </head>
 <body>
 
@@ -17,7 +27,7 @@
     <header class="navbar" id="navbar">
         <nav class="nav-container">
             <a href="#inici" class="nav-logo">
-                <svg class="logo-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <svg class="logo-icon" aria-hidden="true" width="40" height="40" viewBox="0 0 40 40" fill="none">
                     <rect width="40" height="40" rx="10" fill="#E85D3A"/>
                     <path d="M14 28C14 28 14 18 20 12C26 18 26 28 26 28" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
                     <line x1="20" y1="12" x2="20" y2="28" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
@@ -40,7 +50,8 @@
     <main>
         <section class="hero" id="inici">
             <div class="hero-bg">
-                <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=1920&q=80" alt="Productes frescos" loading="eager">
+                <!-- ✅ FIX: Imatge amb dimensions correctes (1480x990) i q=70 per reduir de 704KB a ~200KB -->
+                <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=1480&q=70&auto=format" alt="" role="presentation" loading="eager" width="1480" height="990">
             </div>
             <div class="hero-overlay"></div>
             <div class="hero-float hero-float-1"></div>
@@ -103,7 +114,8 @@
                 <div class="about-grid">
                     <div class="about-image-col reveal">
                         <div class="about-image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80" alt="Equip de FoodLogics" loading="lazy">
+                            <!-- ✅ FIX: Mida adequada al contenidor real, q=70 -->
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=70&auto=format" alt="Equip de professionals treballant en un entorn d'oficina modern" loading="lazy" width="600" height="400">
                         </div>
                         <div class="about-badge"><span class="about-badge-number">12+</span><span class="about-badge-text">Anys d'experiència</span></div>
                     </div>
@@ -176,7 +188,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="#inici" class="nav-logo"><svg class="logo-icon" width="36" height="36" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="#E85D3A"/><path d="M14 28C14 28 14 18 20 12C26 18 26 28 26 28" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/><line x1="20" y1="12" x2="20" y2="28" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="20" cy="10" r="2" fill="white"/></svg><span class="logo-text">Food<span class="logo-accent">Logics</span></span></a>
+                    <a href="#inici" class="nav-logo"><svg class="logo-icon" aria-hidden="true" width="36" height="36" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="#E85D3A"/><path d="M14 28C14 28 14 18 20 12C26 18 26 28 26 28" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/><line x1="20" y1="12" x2="20" y2="28" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="20" cy="10" r="2" fill="white"/></svg><span class="logo-text">Food<span class="logo-accent">Logics</span></span></a>
                     <p class="footer-desc">Transformem la indústria alimentària amb tecnologia avançada, anàlisi de dades i logística intel·ligent.</p>
                 </div>
                 <div class="footer-links-col"><h4>Navegació</h4><ul><li><a href="#inici">Inici</a></li><li><a href="#serveis">Serveis</a></li><li><a href="#nosaltres">Sobre nosaltres</a></li><li><a href="#contacte">Contacte</a></li></ul></div>
@@ -187,69 +199,42 @@
         </div>
     </footer>
 
-    <!-- Banner de cookies -->
-    <div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Consentiment de cookies">
-        <div class="cookie-banner-inner">
-            <div class="cookie-content"><div class="cookie-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg></div><div class="cookie-text"><p>Utilitzem cookies pròpies i de tercers per analitzar el trànsit del nostre web i millorar la teva experiència. Pots acceptar-les totes, rebutjar-les o configurar les teves preferències.</p></div></div>
-            <div class="cookie-actions"><button class="btn btn-sm btn-outline cookie-btn-configure" id="cookieConfigure">Configurar</button><button class="btn btn-sm btn-outline cookie-btn-reject" id="cookieReject">Rebutjar</button><button class="btn btn-sm btn-primary cookie-btn-accept" id="cookieAccept">Acceptar totes</button></div>
-            <div class="cookie-config-panel" id="cookieConfigPanel"><h4>Configuració de cookies</h4><div class="cookie-option"><div class="cookie-option-info"><span class="cookie-option-name">Necessàries</span><span class="cookie-option-desc">Són imprescindibles per al funcionament bàsic del web.</span></div><div class="cookie-toggle cookie-toggle-disabled" aria-label="Cookies necessàries"><span class="cookie-toggle-knob"></span></div></div><div class="cookie-option"><div class="cookie-option-info"><span class="cookie-option-name">Analítiques</span><span class="cookie-option-desc">Ens ajuden a entendre com els usuaris utilitzen el web (Statcounter).</span></div><label class="cookie-toggle" aria-label="Activar cookies analítiques"><input type="checkbox" id="cookieAnalytics" checked><span class="cookie-toggle-knob"></span></label></div><button class="btn btn-sm btn-primary cookie-btn-save" id="cookieSave">Guardar preferències</button></div>
-        </div>
-    </div>
+    <div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Consentiment de cookies"><div class="cookie-banner-inner"><div class="cookie-content"><div class="cookie-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg></div><div class="cookie-text"><p>Utilitzem cookies pròpies i de tercers per analitzar el trànsit del nostre web i millorar la teva experiència. Pots acceptar-les totes, rebutjar-les o configurar les teves preferències.</p></div></div><div class="cookie-actions"><button class="btn btn-sm btn-outline cookie-btn-configure" id="cookieConfigure">Configurar</button><button class="btn btn-sm btn-outline cookie-btn-reject" id="cookieReject">Rebutjar</button><button class="btn btn-sm btn-primary cookie-btn-accept" id="cookieAccept">Acceptar totes</button></div><div class="cookie-config-panel" id="cookieConfigPanel"><h4>Configuració de cookies</h4><div class="cookie-option"><div class="cookie-option-info"><span class="cookie-option-name">Necessàries</span><span class="cookie-option-desc">Són imprescindibles per al funcionament bàsic del web.</span></div><div class="cookie-toggle cookie-toggle-disabled" aria-label="Cookies necessàries"><span class="cookie-toggle-knob"></span></div></div><div class="cookie-option"><div class="cookie-option-info"><span class="cookie-option-name">Analítiques</span><span class="cookie-option-desc">Ens ajuden a entendre com els usuaris utilitzen el web (Statcounter).</span></div><label class="cookie-toggle" aria-label="Activar cookies analítiques"><input type="checkbox" id="cookieAnalytics" checked><span class="cookie-toggle-knob"></span></label></div><button class="btn btn-sm btn-primary cookie-btn-save" id="cookieSave">Guardar preferències</button></div></div></div>
     <div id="statcounterContainer"></div>
 
     <script>
         /* === COOKIES === */
-        var cc=localStorage.getItem('foodlogics_cookie_consent');
-        function ls(){document.getElementById('statcounterContainer').innerHTML='<script type="text\/javascript">var sc_project=13214962;var sc_invisible=1;var sc_security="3146d5f2";<\/script><script type="text\/javascript" src="https:\/\/www.statcounter.com\/counter\/counter.js" async><\/script><noscript><div class="statcounter"><a title="real time web analytics" href="https:\/\/statcounter.com\/" target="_blank"><img class="statcounter" src="https:\/\/c.statcounter.com\/13214962\/0\/3146d5f2\/1\/" alt="real time web analytics" referrerPolicy="no-referrer-when-downgrade"><\/a><\/div><\/noscript>';}
-        if(cc==='accepted'||cc==='analytics')ls();
-        if(!cc)document.getElementById('cookieBanner').classList.add('visible');
-        document.getElementById('cookieAccept').addEventListener('click',function(){localStorage.setItem('foodlogics_cookie_consent','accepted');document.getElementById('cookieBanner').classList.remove('visible');ls();});
-        document.getElementById('cookieReject').addEventListener('click',function(){localStorage.setItem('foodlogics_cookie_consent','rejected');document.getElementById('cookieBanner').classList.remove('visible');});
-        document.getElementById('cookieConfigure').addEventListener('click',function(){document.getElementById('cookieConfigPanel').classList.toggle('open');});
-        document.getElementById('cookieSave').addEventListener('click',function(){if(document.getElementById('cookieAnalytics').checked){localStorage.setItem('foodlogics_cookie_consent','analytics');ls();}else{localStorage.setItem('foodlogics_cookie_consent','rejected');}document.getElementById('cookieBanner').classList.remove('visible');});
+        var cc=localStorage.getItem('foodlogics_cookie_consent');function ls(){document.getElementById('statcounterContainer').innerHTML='<script type="text\/javascript">var sc_project=13214962;var sc_invisible=1;var sc_security="3146d5f2";<\/script><script type="text\/javascript" src="https:\/\/www.statcounter.com\/counter\/counter.js" async><\/script><noscript><div class="statcounter"><a title="real time web analytics" href="https:\/\/statcounter.com\/" target="_blank"><img class="statcounter" src="https:\/\/c.statcounter.com\/13214962\/0\/3146d5f2\/1\/" alt="real time web analytics" referrerPolicy="no-referrer-when-downgrade"><\/a><\/div><\/noscript>';}if(cc==='accepted'||cc==='analytics')ls();if(!cc)document.getElementById('cookieBanner').classList.add('visible');document.getElementById('cookieAccept').addEventListener('click',function(){localStorage.setItem('foodlogics_cookie_consent','accepted');document.getElementById('cookieBanner').classList.remove('visible');ls();});document.getElementById('cookieReject').addEventListener('click',function(){localStorage.setItem('foodlogics_cookie_consent','rejected');document.getElementById('cookieBanner').classList.remove('visible');});document.getElementById('cookieConfigure').addEventListener('click',function(){document.getElementById('cookieConfigPanel').classList.toggle('open');});document.getElementById('cookieSave').addEventListener('click',function(){if(document.getElementById('cookieAnalytics').checked){localStorage.setItem('foodlogics_cookie_consent','analytics');ls();}else{localStorage.setItem('foodlogics_cookie_consent','rejected');}document.getElementById('cookieBanner').classList.remove('visible');});
 
-        /* === SCROLL PROGRESS === */
-        var sp=document.getElementById('scrollProgress');
+        /* === ELEMENTS DEL DOM (cachem un sol cop) === */
+        var sp=document.getElementById('scrollProgress'),nb=document.getElementById('navbar'),secs=document.querySelectorAll('section[id]'),nlis=document.querySelectorAll('.nav-link'),sg=document.querySelector('.stats-grid');
+
+        /* === FUNCIONS === */
         function usp(){var h=document.documentElement.scrollHeight-window.innerHeight;sp.style.width=(h>0?(window.scrollY/h)*100:0)+'%';}
-
-        /* === NAVBAR === */
-        var nb=document.getElementById('navbar');
         function unb(){nb.classList.toggle('navbar-scrolled',window.scrollY>60);}
+        function ual(){var s=window.scrollY+120;for(var i=0;i<secs.length;i++){if(s>=secs[i].offsetTop&&s<secs[i].offsetTop+secs[i].offsetHeight){for(var j=0;j<nlis.length;j++){nlis[j].classList.remove('active');if(nlis[j].getAttribute('href')==='#'+secs[i].id)nlis[j].classList.add('active');}break;}}}
 
-        /* === MENÚ MÒBIL === */
-        var nt=document.getElementById('navToggle'),nl=document.getElementById('navLinks');
-        nt.addEventListener('click',function(){this.classList.toggle('active');nl.classList.toggle('open');document.body.classList.toggle('no-scroll');});
-        nl.querySelectorAll('.nav-link').forEach(function(l){l.addEventListener('click',function(){nt.classList.remove('active');nl.classList.remove('open');document.body.classList.remove('no-scroll');});});
+        /* ✅ FIX FORCED REFLOW: requestAnimationFrame per agrupar lectures de layout */
+        var ticking=false;
+        function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(function(){usp();unb();ual();ticking=false;});}}
 
-        /* === ENLLAÇ ACTIU === */
-        var secs=document.querySelectorAll('section[id]'),nlis=document.querySelectorAll('.nav-link');
-        function ual(){var s=window.scrollY+120;secs.forEach(function(sec){if(s>=sec.offsetTop&&s<sec.offsetTop+sec.offsetHeight){nlis.forEach(function(l){l.classList.remove('active');if(l.getAttribute('href')==='#'+sec.id)l.classList.add('active');});}});}
+        /* === NAV MÒBIL === */
+        var nt=document.getElementById('navToggle'),nl=document.getElementById('navLinks');nt.addEventListener('click',function(){this.classList.toggle('active');nl.classList.toggle('open');document.body.classList.toggle('no-scroll');});nl.querySelectorAll('.nav-link').forEach(function(l){l.addEventListener('click',function(){nt.classList.remove('active');nl.classList.remove('open');document.body.classList.remove('no-scroll');});});
 
         /* === SMOOTH SCROLL === */
         document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(this.getAttribute('href'));if(t)window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-nb.offsetHeight-10,behavior:'smooth'});});});
 
         /* === SCROLL REVEAL === */
-        var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('active');ro.unobserve(e.target);}});},{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
-        document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
+        var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('active');ro.unobserve(e.target);}});},{threshold:0.15,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
 
         /* === COMPTADORS === */
-        var cs=false;
-        function ac(el){var tg=parseInt(el.dataset.target),px=el.dataset.prefix||'',sx=el.dataset.suffix||'',du=2000,st=null;function step(ts){if(!st)st=ts;var pr=Math.min((ts-st)/du,1),ea=1-Math.pow(1-pr,3);el.textContent=px+Math.floor(ea*tg)+sx;if(pr<1)requestAnimationFrame(step);else el.textContent=px+tg+sx;}requestAnimationFrame(step);}
-        var sg=document.querySelector('.stats-grid');
-        if(sg)new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting&&!cs){cs=true;document.querySelectorAll('.stat-number').forEach(ac);}});},{threshold:0.5}).observe(sg);
+        var cs=false;function ac(el){var tg=parseInt(el.dataset.target),px=el.dataset.prefix||'',sx=el.dataset.suffix||'',du=2000,st=null;function step(ts){if(!st)st=ts;var pr=Math.min((ts-st)/du,1),ea=1-Math.pow(1-pr,3);el.textContent=px+Math.floor(ea*tg)+sx;if(pr<1)requestAnimationFrame(step);else el.textContent=px+tg+sx;}requestAnimationFrame(step);}if(sg)new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting&&!cs){cs=true;document.querySelectorAll('.stat-number').forEach(ac);}});},{threshold:0.5}).observe(sg);
 
         /* === FORMULARI === */
-        var cf=document.getElementById('contactForm'),fs=document.getElementById('formSuccess');
-        cf.addEventListener('submit',function(e){e.preventDefault();var v=true;
-        ['nom','email','missatge'].forEach(function(id){var f=document.getElementById(id);if(!f.value.trim()){f.parentElement.classList.add('error');v=false;}else f.parentElement.classList.remove('error');});
-        if(!document.getElementById('acceptaPrivacitat').checked){document.getElementById('checkboxPrivacitat').classList.add('error');v=false;}else document.getElementById('checkboxPrivacitat').classList.remove('error');
-        if(!v)return;cf.style.display='none';fs.classList.add('visible');});
-        document.getElementById('resetForm').addEventListener('click',function(){cf.reset();cf.style.display='';fs.classList.remove('visible');cf.querySelectorAll('.form-group,.form-checkbox-group').forEach(function(g){g.classList.remove('error');});});
-        cf.querySelectorAll('input,textarea').forEach(function(f){f.addEventListener('input',function(){this.parentElement.classList.remove('error');});});
-        document.getElementById('acceptaPrivacitat').addEventListener('change',function(){document.getElementById('checkboxPrivacitat').classList.remove('error');});
+        var cf=document.getElementById('contactForm'),fs=document.getElementById('formSuccess');cf.addEventListener('submit',function(e){e.preventDefault();var v=true;['nom','email','missatge'].forEach(function(id){var f=document.getElementById(id);if(!f.value.trim()){f.parentElement.classList.add('error');v=false;}else f.parentElement.classList.remove('error');});if(!document.getElementById('acceptaPrivacitat').checked){document.getElementById('checkboxPrivacitat').classList.add('error');v=false;}else document.getElementById('checkboxPrivacitat').classList.remove('error');if(!v)return;cf.style.display='none';fs.classList.add('visible');});document.getElementById('resetForm').addEventListener('click',function(){cf.reset();cf.style.display='';fs.classList.remove('visible');cf.querySelectorAll('.form-group,.form-checkbox-group').forEach(function(g){g.classList.remove('error');});});cf.querySelectorAll('input,textarea').forEach(function(f){f.addEventListener('input',function(){this.parentElement.classList.remove('error');});});document.getElementById('acceptaPrivacitat').addEventListener('change',function(){document.getElementById('checkboxPrivacitat').classList.remove('error');});
 
-        /* === SCROLL === */
-        window.addEventListener('scroll',function(){usp();unb();ual();},{passive:true});
+        /* === SCROLL LISTENER (un sol listener, un sol rAF per frame) === */
+        window.addEventListener('scroll',onScroll,{passive:true});
         usp();unb();
     </script>
 </body>
